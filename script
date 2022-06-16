@@ -46,9 +46,7 @@ local card = gen:Channel("Lucky Combination")
     game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
     end)
     
-    local set = gen:Channel("Settings")
-    
-        set:Toggle("card glitch (get 3 cards)",false, function(bool)
+            fun:Toggle("infinite card glitch",false, function(bool)
     print(bool)
     cardglitch = bool
         if bool == true then
@@ -57,13 +55,14 @@ local card = gen:Channel("Lucky Combination")
     end)
     
     while wait() do
-    if autoc == true then
-    local args = {
+       if autoc == true then
+        local args = {
     [1] = game:GetService("Players").LocalPlayer,
     [2] = 1000
 }
 
 game:GetService("ReplicatedStorage").ChangingGun:FireServer(unpack(args))
+if cardglitch == false then
             if not plr.Backpack:FindFirstChild("Card") and not plr.Character:FindFirstChild("Card") then
     if rand == false then
     local args = {
@@ -81,8 +80,23 @@ game:GetService("ReplicatedStorage").ChangingGun:FireServer(unpack(args))
     game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
     end
             end
-            if cardglitch == false then
     wait(1)
+    else
+        if rand == false then
+    local args = {
+    [1] = 768,
+    [2] = cardnumber
+    }
+
+    game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
+    else
+        local args = {
+    [1] = 768,
+    [2] = math.random(100, 999)
+    }
+
+    game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
     end
-    end
+end
+end
     end
