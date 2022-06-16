@@ -1,0 +1,73 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("afk and wait till its your magic number simulator")
+
+local plr = game.Players.LocalPlayer
+
+local rand = false
+local autoc = false
+local cardglitch = false
+local cardnumber = 100
+
+local gen = win:Server("Game", "")
+
+local card = gen:Channel("Lucky Combination")
+
+    card:Toggle("Auto Combination",false, function(bool)
+    print(bool)
+    autoc = bool
+    if bool == true then
+    DiscordLib:Notification("WARNING", "if you dont get the card immediately just wait (game makes this happen)", "ok")
+    end
+    end)
+    
+    local sldr = card:Slider("Card Number", 100, 999, 0, function(t)
+    print(t)
+    cardnumber = t
+    end)
+    
+    card:Toggle("Random Number",false, function(bool)
+    print(bool)
+    rand = bool
+    end)
+    
+    local set = gen:Channel("Settings")
+    
+        set:Toggle("card glitch (get 3 cards)",false, function(bool)
+    print(bool)
+    cardglitch = bool
+        if bool == true then
+    DiscordLib:Notification("Notification", "turn on auto combination for this to work", "ok")
+    end
+    end)
+    
+    while wait() do
+    if autoc == true then
+    local args = {
+    [1] = game:GetService("Players").LocalPlayer,
+    [2] = 1000
+}
+
+game:GetService("ReplicatedStorage").ChangingGun:FireServer(unpack(args))
+            if not plr.Backpack:FindFirstChild("Card") and not plr.Character:FindFirstChild("Card") then
+    if rand == false then
+    local args = {
+    [1] = 768,
+    [2] = cardnumber
+    }
+
+    game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
+    else
+        local args = {
+    [1] = 768,
+    [2] = math.random(100, 999)
+    }
+
+    game:GetService("ReplicatedStorage").BoomEvent:FireServer(unpack(args))
+    end
+            end
+            if cardglitch == false then
+    wait(1)
+    end
+    end
+    end
