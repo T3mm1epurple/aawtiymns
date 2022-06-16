@@ -31,6 +31,10 @@ local card = gen:Channel("Lucky Combination")
     rand = bool
     end)
     
+    card:Button("Throw away card", function()
+    game:GetService("ReplicatedStorage").ThrowEvent:FireServer()
+    end)
+    
     local set = gen:Channel("Settings")
     
         set:Toggle("card glitch (get 3 cards)",false, function(bool)
